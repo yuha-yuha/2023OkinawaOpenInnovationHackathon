@@ -33,6 +33,3 @@ def delete(userid):
 
 def start_finish(userid):
     usermap[userid]["session"] = []
-
-
-print(ask("大学の学業に追いつかない。授業や課題への圧迫感がつらい。",123))
