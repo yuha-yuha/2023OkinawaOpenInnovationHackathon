@@ -59,6 +59,24 @@ def handle_message(event):
                         
                     )
                 )
+            case "岸田総理":
+                open_ai.kishida(event.source.user_id)
+                line_bot_api.reply_message_with_http_info(
+                    ReplyMessageRequest(
+                        replyToken=event.reply_token,
+                        messages=[TextMessage(text="変更しました")]
+                        
+                    )
+                )
+            case "坂本龍馬":
+                open_ai.sakamoto(event.source.user_id)
+                line_bot_api.reply_message_with_http_info(
+                    ReplyMessageRequest(
+                        replyToken=event.reply_token,
+                        messages=[TextMessage(text="変更しました")]
+                        
+                    )
+                )
             case _:
                 gpt_response = open_ai.ask(event.message.text, event.source.user_id)
                 voice_json = open_ai.voice_reply(gpt_response, event.reply_token)
