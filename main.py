@@ -45,7 +45,7 @@ def handle_message(event):
         line_bot_api = MessagingApi(api_client)
         match event.message.text:
             case "終了":
-                pass
+                open_ai.SessionDelete()
             case _:
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
