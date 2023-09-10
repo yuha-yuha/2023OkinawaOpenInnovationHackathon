@@ -52,20 +52,20 @@ def handle_message(event):
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
                         replyToken=event.reply_token,
-                        messages=[TextMessage(text="受信テスト")]
+                        messages=[TextMessage(text="変更しました")]
                         
                     )
                 )
             case _:
                 gpt_response = open_ai.ask(event.message.text, event.source.user_id)
-                short_url = open_ai.voice_reply(gpt_response, event.reply_token)
+                voice_json = open_ai.voice_reply(gpt_response, event.reply_token)
 
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
                        reply_token=event.reply_token,
                        messages=[
                            TextMessage(text=gpt_response),
-                           AudioMessage(originalContentUrl=short_url)
+                           AudioMessage(originalContentUrl=voice_json["url"],duration=int(voice_json["duration"]))
                         ]
                     )
                 )
