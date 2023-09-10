@@ -33,3 +33,12 @@ def delete(userid):
 
 def start_finish(userid):
     usermap[userid]["session"] = []
+
+
+
+
+
+
+#print(ask("私は年収も低く、顔もブサイクで、異性と喋ったこともありません。もう生きるのが辛いです。",123))
+#feedback("語尾に「にゃん」をつけてください。かわいい口調で返答してください",123)
+#print(ask("こんな私はどうしたらいい？",123))
