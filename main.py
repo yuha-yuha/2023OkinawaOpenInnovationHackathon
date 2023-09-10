@@ -41,8 +41,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
+    #print(event)
     with ApiClient(Configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
+        Userprofile = line_bot_api.get_profile(event.source.user_id)
+        print(Userprofile)
         match event.message.text:
             case "終了":
                 open_ai.SessionDelete()
