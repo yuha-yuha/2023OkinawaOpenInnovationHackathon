@@ -1,5 +1,8 @@
 import openai
-openai.api_key = ""
+from dotenv import load_dotenv
+import os
+load_dotenv()
+openai.api_key = os.environ['open_ai_key'] 
 
 #GPTの初期設定
 usermap = {"user1": {"settings":[],
