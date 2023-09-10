@@ -13,7 +13,8 @@ from linebot.v3.messaging import (
     ApiClient,
     MessagingApi,
     ReplyMessageRequest,
-    TextMessage
+    TextMessage,
+    AudioMessage
 )
 from linebot.v3.webhooks import (
     MessageEvent,
@@ -46,13 +47,30 @@ def handle_message(event):
         match event.message.text:
             case "終了":
                 pass
-            case _:
+            case "マツコデラックス":
+                open_ai.matuko(event.source.user_id)
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
-                        reply_token=event.reply_token,
-                        messages=[TextMessage(text=open_ai.ask(event.message.text, event.source.user_id))]
+                        replyToken=event.reply_token,
+                        messages=[TextMessage(text="受信テスト")]
+                        
                     )
                 )
+            case _:
+                gpt_response = open_ai.ask(event.message.text, event.source.user_id)
+                short_url = open_ai.voice_reply(gpt_response, event.reply_token)
+
+                line_bot_api.reply_message_with_http_info(
+                    ReplyMessageRequest(
+                       reply_token=event.reply_token,
+                       messages=[
+                           TextMessage(text=gpt_response),
+                           AudioMessage(originalContentUrl=short_url)
+                        ]
+                    )
+                )
+                
+               
 
     
 if __name__ == "__main__":
