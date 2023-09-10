@@ -28,10 +28,7 @@ def ask(question,userid):
 def feedback(feedback,userid):
     usermap[userid]["settings"].append({'role':'system', 'content':feedback})
 
-def delete(userid):
-    usermap[userid]["session"] = []
-
-def start_finish(userid):
+def SessionDelete(userid):
     usermap[userid]["session"] = []
 
 
