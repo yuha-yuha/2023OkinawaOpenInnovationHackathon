@@ -61,6 +61,7 @@ def voice_reply(message: str, reply_token: str):
         'reply_token': reply_token
     }
     response = requests.post('https://nomunomu0504.ngrok.dev/line_voice', json=payload)
+    print(response)
     response_json = response.json()
 
     return response_json
