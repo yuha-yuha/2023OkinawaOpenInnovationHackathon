@@ -1,4 +1,5 @@
 import os
+import open_ai
 from dotenv import load_dotenv
 from flask import Flask, request, abort
 from linebot.v3 import (
@@ -49,7 +50,7 @@ def handle_message(event):
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text=event.message.text)]
+                        messages=[TextMessage(text=open_ai.ask(event.message.text, event.source.user_id))]
                     )
                 )
 
